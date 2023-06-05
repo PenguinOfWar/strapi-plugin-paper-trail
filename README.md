@@ -2,6 +2,8 @@
 
 Accountability and content versioning for strapi v4+.
 
+[![npm version](https://badge.fury.io/js/strapi-plugin-paper-trail.svg)](https://badge.fury.io/js/strapi-plugin-paper-trail)
+
 ## Requirements
 
 1. `node` `v14` or higher
