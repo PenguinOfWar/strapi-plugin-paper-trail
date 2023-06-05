@@ -123,3 +123,24 @@ In no particular order and subject to change depending on priorities.
 4. Pagination for longer revision history lists.
 5. Plugin management panel for purging revision history.
 6. Selecting which field to send the revised change to on the record (supporting schema name changes).
+7. Better support for only logging changed fields (currently the `strapi` admin sends the entire record back and not just the changes fields) to reduce revision noise.
+
+## Support
+
+Please create an issue in the [issue tracker](https://github.com/PenguinOfWar/strapi-plugin-paper-trail/issues) if you have a problem or need support. Please select the correct label when creating your issue (e.g. `help wanted` or `bug`).
+
+## Contributing
+
+Contributions are welcome. Note that code style is enforced with `prettier`. Kindly adhere to this while making contributions.
+
+### Step 1: Fork this repo
+
+### Step 2: Start hacking
+
+### Step 3: [Open a PR](https://github.com/PenguinOfWar/strapi-plugin-paper-trail/pulls)
+
+### Step 4: Profit 💰💰💰
+
+## License
+
+MIT License
