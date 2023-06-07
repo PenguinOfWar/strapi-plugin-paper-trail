@@ -58,6 +58,7 @@ module.exports = {
   },
   uid: 'api::another-type.another-type',
   schema: {
+    uid: 'api::test-content-type.test-content-type', // Not present on the static schema, added by strapi at runtime
     kind: 'collectionType',
     collectionName: 'another_types',
     info: {
