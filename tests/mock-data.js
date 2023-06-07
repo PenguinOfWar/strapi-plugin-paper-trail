@@ -1,17 +1,19 @@
 const trail = {
+  id: 5,
   someText: 'Foobar123456123123123',
   publishedAt: '2023-06-05T15:38:30.608Z',
   locale: 'en',
-  localizations: [4]
+  localizations: [4],
+  password: 'foo123'
 };
 
-module.exports = {
-  entityServiceResponse: {
+const entityServiceResponse = (change, version) => {
+  return {
     id: 5,
     recordId: '2',
     contentType: 'api::another-type.another-type',
-    version: 4,
-    change: 'UPDATE',
+    version,
+    change,
     content: {
       locale: 'en',
       someText: 'Foobar123456123123123',
@@ -20,7 +22,12 @@ module.exports = {
     },
     createdAt: '2023-06-06T09:22:08.025Z',
     updatedAt: '2023-06-06T09:22:08.025Z'
-  },
+  };
+};
+
+module.exports = {
+  entityServiceResponse: (change, version) =>
+    entityServiceResponse(change, version),
   trail,
   context: {
     state: {
@@ -49,6 +56,7 @@ module.exports = {
       }
     }
   },
+  uid: 'api::another-type.another-type',
   schema: {
     kind: 'collectionType',
     collectionName: 'another_types',
@@ -58,78 +66,29 @@ module.exports = {
       displayName: 'AnotherType',
       description: ''
     },
-    options: { draftAndPublish: true },
-    pluginOptions: { paperTrail: { enabled: true }, i18n: { localized: true } },
-    attributes: {
-      someText: { type: 'string', pluginOptions: [Object] },
-      createdAt: { type: 'datetime' },
-      updatedAt: { type: 'datetime' },
-      publishedAt: {
-        type: 'datetime',
-        configurable: false,
-        writable: true,
-        visible: false
+    options: {
+      draftAndPublish: true
+    },
+    pluginOptions: {
+      paperTrail: {
+        enabled: true
       },
-      createdBy: {
-        type: 'relation',
-        relation: 'oneToOne',
-        target: 'admin::user',
-        configurable: false,
-        writable: false,
-        visible: false,
-        useJoinTable: false,
-        private: true
-      },
-      updatedBy: {
-        type: 'relation',
-        relation: 'oneToOne',
-        target: 'admin::user',
-        configurable: false,
-        writable: false,
-        visible: false,
-        useJoinTable: false,
-        private: true
-      },
-      localizations: {
-        writable: true,
-        private: false,
-        configurable: false,
-        visible: false,
-        type: 'relation',
-        relation: 'oneToMany',
-        target: 'api::another-type.another-type'
-      },
-      locale: {
-        writable: true,
-        private: false,
-        configurable: false,
-        visible: false,
-        type: 'string'
+      i18n: {
+        localized: true
       }
     },
-    __schema__: {
-      collectionName: 'another_types',
-      info: {
-        singularName: 'another-type',
-        pluralName: 'another-types',
-        displayName: 'AnotherType',
-        description: ''
+    attributes: {
+      someText: {
+        type: 'string',
+        pluginOptions: {
+          i18n: {
+            localized: true
+          }
+        }
       },
-      options: { draftAndPublish: true },
-      pluginOptions: { paperTrail: [Object], i18n: [Object] },
-      attributes: { someText: [Object] },
-      kind: 'collectionType'
-    },
-    modelType: 'contentType',
-    modelName: 'another-type',
-    connection: 'default',
-    uid: 'api::another-type.another-type',
-    apiName: 'another-type',
-    globalId: 'AnotherType',
-    actions: {},
-    lifecycles: {}
-  },
-  uid: 'api::another-type.another-type',
-  type: 'UPDATE',
-  isAdmin: true
+      password: {
+        type: 'password'
+      }
+    }
+  }
 };
