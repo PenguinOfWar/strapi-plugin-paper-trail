@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-paper-trail",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Accountability and content versioning for strapi v4+",
   "strapi": {
     "name": "paper-trail",
