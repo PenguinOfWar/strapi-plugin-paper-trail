@@ -61,9 +61,11 @@ module.exports = ({ strapi }) => ({
      */
 
     try {
-      await strapi.entityService.create(entityName, {
+      const entity = await strapi.entityService.create(entityName, {
         data: newTrail
       });
+
+      return entity;
     } catch (Err) {
       console.warn('paper-trail: ', Err);
     }
