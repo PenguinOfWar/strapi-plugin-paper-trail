@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-paper-trail",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Accountability and content versioning for strapi v4+",
   "strapi": {
     "name": "paper-trail",
@@ -20,17 +20,17 @@
     "jest": "^29.5.0",
     "leasot": "^13.3.0",
     "prettier": "^2.8.8",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "styled-components": "^5.3.6"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.10.7",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
     "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.3"
   },
   "author": {
     "name": "Darryl Walker",
