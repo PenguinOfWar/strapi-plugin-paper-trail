@@ -22,6 +22,10 @@ module.exports = (contentTypeUid, isAdmin) => {
       }
     });
 
+    if (!schema) {
+      return false;
+    }
+
     const innerSchema = schema[1];
 
     return innerSchema;
