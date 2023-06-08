@@ -2,7 +2,7 @@
 
 Accountability and content versioning for strapi v4+.
 
-[![Unit Tests](https://github.com/PenguinOfWar/strapi-plugin-paper-trail/actions/workflows/unit-test.yml/badge.svg)](https://github.com/PenguinOfWar/strapi-plugin-paper-trail/actions/workflows/unit-test.yml)
+[![npm version](https://badge.fury.io/js/strapi-plugin-paper-trail.svg)](https://badge.fury.io/js/strapi-plugin-paper-trail) [![Unit Tests](https://github.com/PenguinOfWar/strapi-plugin-paper-trail/actions/workflows/unit-test.yml/badge.svg)](https://github.com/PenguinOfWar/strapi-plugin-paper-trail/actions/workflows/unit-test.yml)
 
 ## Requirements
 
