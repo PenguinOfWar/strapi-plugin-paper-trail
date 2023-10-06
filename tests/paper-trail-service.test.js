@@ -1,6 +1,6 @@
 const paperTrailService = require('../server/services/paper-trail');
 const { context, entityServiceResponse, uid } = require('./mock-data');
-const schema = require('../server/content-types/trail/schema.json');
+const { schema } = require('../server/content-types/trail');
 
 describe('service: paper-trail - CREATE', () => {
   let strapi;
