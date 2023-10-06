@@ -110,21 +110,20 @@ While I have tried to keep the plugin as simple and intuitive to use as possible
 
 1. The plugin has currently only been tested on `node v18`, though it should work perfectly on any node version that `strapi v4` directly supports (currently `node v14` and up).
 2. The plugin relies on the content type plugin `UID` property to identify the correct content type and associate the revision history. If you change this value you will lose previous revision histories (all revision history records can be manually browsed and modified from `Content Manager > Collection Types > Trail`).
-3. There is currently no revision history or auditing bound to `DELETE` events (but it is on the roadmap).
-4. This has not been tested with all available custom field plugins, however as long as the custom field plugin implements on top of the core strapi content manager types (e.g. `string`, `text`, `biginteger`, `json`, `component`, and so on) and isn't doing anything too arcane, then it should be fine.
-5. The plugin is a middleware listening on the admin and user content management endpoints. Making changes directly to the records outside of this scope (e.g. from a custom service or controller) will not be logged as a revision by the plugin, however it shouldn't be difficult to manually implement this if needed.
-6. Attempting to restore a unique field with a duplicate value will cause the request to fail.
-7. Likewise, attempting to restore a field that has been since deleted from the schema or renamed will cause the attempt to fail.
-8. `password` type is not supported for security reasons.
-9. The plugin is still in early development, use with caution!
-10. Pull requests for new features and fixes welcome and encouraged 🚀
+3. This has not been tested with all available custom field plugins, however as long as the custom field plugin implements on top of the core strapi content manager types (e.g. `string`, `text`, `biginteger`, `json`, `component`, and so on) and isn't doing anything too arcane, then it should be fine.
+4. The plugin is a middleware listening on the admin and user content management endpoints. Making changes directly to the records outside of this scope (e.g. from a custom service or controller) will not be logged as a revision by the plugin, however it shouldn't be difficult to manually implement this if needed.
+5. Attempting to restore a unique field with a duplicate value will cause the request to fail.
+6. Likewise, attempting to restore a field that has been since deleted from the schema or renamed will cause the attempt to fail (restoration of a delete field is on the roadmap)
+7. `password` type is not supported for security reasons.
+8. The plugin is still in early development, use with caution!
+9. Pull requests for new features and fixes welcome and encouraged 🚀
 
 ## Roadmap
 
 In no particular order and subject to change depending on priorities.
 
 1. Compare diffs against current vs chosen revision, or two separate revisions.
-2. Audit logging for `DELETE` events and restoration of deleted records.
+2. Restoration for records deleted by `DELETE` event.
 3. Small enhancements to better leverage available `strapi` server hooks instead of custom code.
 4. Pagination for longer revision history lists.
 5. Plugin management panel for purging revision history.
