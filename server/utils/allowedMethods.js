@@ -1,1 +1,1 @@
-module.exports = ['POST', 'PUT'];
+module.exports = ['POST', 'PUT','DELETE'];
