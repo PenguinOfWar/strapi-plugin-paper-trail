@@ -1,3 +1,4 @@
+const _ = require('lodash');
 module.exports = (update, schema) => {
   /**
    * Ignore the default strapi fields to focus on custom fields
@@ -6,7 +7,6 @@ module.exports = (update, schema) => {
     'id',
     'createdAt',
     'updatedAt',
-    'createdBy',
     'createdBy',
     'updatedBy',
     'password' // For security
@@ -18,14 +18,15 @@ module.exports = (update, schema) => {
 
   let trail = {};
   let ignored = {};
-
-  Object.keys(update).map(key => {
-    if (schema.attributes.hasOwnProperty(key) && !ignoreProps.includes(key)) {
-      trail[key] = update[key];
-    } else {
-      ignored[key] = update[key];
-    }
-  });
+  if (!_.isEmpty(update)) {
+    Object.keys(update).map(key => {
+      if (schema.attributes.hasOwnProperty(key) && !ignoreProps.includes(key)) {
+        trail[key] = update[key];
+      } else {
+        ignored[key] = update[key];
+      }
+    });
+  }
 
   return { trail, ignored };
 };
