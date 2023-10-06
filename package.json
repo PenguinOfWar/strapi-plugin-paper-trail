@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-paper-trail",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Accountability and content versioning for strapi v4+",
   "strapi": {
     "name": "paper-trail",
@@ -39,6 +39,12 @@
   "maintainers": [
     {
       "name": "Darryl Walker"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Brianggalvez",
+      "url": "https://github.com/Brianggalvez"
     }
   ],
   "engines": {
