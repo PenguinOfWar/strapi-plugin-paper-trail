@@ -1,5 +1,5 @@
 {
-  "name": "strapi-plugin-paper-trail",
+  "name": "@lucassmuller/strapi-plugin-paper-trail",
   "version": "0.3.0",
   "description": "Accountability and content versioning for strapi v4+",
   "strapi": {
@@ -58,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PenguinOfWar/strapi-plugin-paper-trail.git"
+    "url": "git+https://github.com/lucassmuller/strapi-plugin-paper-trail.git"
   },
   "bugs": {
     "url": "https://github.com/PenguinOfWar/strapi-plugin-paper-trail/issues"
