@@ -152,7 +152,14 @@ function PaperTrail() {
         }),
       });
     } catch (err) {
-      console.error(err)
+      console.error(err);
+      toggleNotification({
+        type: 'warning',
+        message: formatMessage({
+          id: getTrad('plugin.admin.paperTrail.draftError'),
+          defaultMessage: 'Error saving draft version'
+        }),
+      });
     }
   }
 
