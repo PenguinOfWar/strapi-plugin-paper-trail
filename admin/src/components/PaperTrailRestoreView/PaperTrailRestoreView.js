@@ -1,4 +1,4 @@
-import { BaseHeaderLayout, Box, Divider, Link } from '@strapi/design-system';
+import { BaseHeaderLayout, Box, Typography, Link } from '@strapi/design-system';
 import { ArrowLeft } from '@strapi/icons';
 import { format, parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
@@ -50,8 +50,23 @@ function PaperTrailRestoreView(props) {
           as="h3"
         />
       </Box>
-      <Box paddingBottom={6} paddingTop={6}>
-        <Divider />
+      <Box
+        background="neutral0"
+        borderColor="neutral150"
+        hasRadius
+        paddingBottom={4}
+        paddingLeft={4}
+        paddingRight={4}
+        paddingTop={6}
+        marginTop={6}
+        marginBottom={6}
+      >
+        <Typography variant="beta">
+          Comment: <br />
+        </Typography>
+        <Typography>
+          {trail.comment}
+        </Typography>
       </Box>
       <Box
         background="neutral0"

@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   Loader,
+  Textarea,
   Typography
 } from '@strapi/design-system';
 import {
@@ -22,7 +23,7 @@ function PaperTrail() {
   /**
    * Get the current schema
    */
-  const { layout } = useCMEditViewDataManager();
+  const { layout, modifiedData, slug } = useCMEditViewDataManager();
 
   const { uid, pluginOptions = {} } = layout;
 
@@ -102,9 +103,34 @@ function PaperTrail() {
 
   useEffect(() => {
     if (trails.length > 0) {
-      setCurrent(trails[0]);
+      console.log(trails.find(trail => trail.change !== 'DRAFT'));
+      setCurrent(trails.find(trail => trail.change !== 'DRAFT'));
     }
   }, [trails]);
+
+  const handleUpdateComment = (comment) => {
+    if (!current) return;
+
+    request.put(
+      `/content-manager/collection-types/plugin::paper-trail.trail/${current.id}`,
+      { comment }
+    );
+  };
+
+  const handleSaveDraft = async () => {
+    try {
+      const { data: response } = await request.post(
+        '/paper-trail/draft',
+        {
+          contentType: slug,
+          ...modifiedData
+        }
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   if (!paperTrailEnabled) {
     return <Fragment />;
@@ -160,7 +186,7 @@ function PaperTrail() {
                       id: getTrad('plugin.admin.paperTrail.currentVersion'),
                       defaultMessage: 'Current version:'
                     })}{' '}
-                    {trails.length}
+                    {current.version}
                   </Typography>
                 </p>
                 <p>
@@ -185,6 +211,21 @@ function PaperTrail() {
                     {getUser(current)}
                   </Typography>
                 </p>
+                <Box paddingTop={2}>
+                  <Textarea
+                    label="Version comment"
+                    defaultValue={current.comment || ''}
+                    onChange={(event) => handleUpdateComment(event.target.value)}
+                  />
+                </Box>
+                <Box paddingTop={4}>
+                  <Button onClick={() => handleSaveDraft()}>
+                    {formatMessage({
+                      id: getTrad('plugin.admin.paperTrail.saveDraft'),
+                      defaultMessage: 'Save as draft'
+                    })}
+                  </Button>
+                </Box>
                 <Box paddingTop={4}>
                   <Button onClick={() => setModalVisible(!modalVisible)}>
                     {formatMessage({

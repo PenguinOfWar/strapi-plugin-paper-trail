@@ -12,7 +12,7 @@ module.exports = ({ strapi }) => ({
       ? context.response.body
       : context.response.body.data;
 
-    const id = resBody.id || resBody?.data?.id;
+    const id = resBody?.id || resBody?.data?.id || body?.id;
 
     /**
      * Early return, if we don't have a record ID for existing or newly created record the trail is useless

@@ -42,6 +42,9 @@ module.exports = {
         type: 'relation',
         relation: 'oneToOne',
         target: 'admin::user'
+      },
+      comment: {
+        type: 'text'
       }
     }
   }
