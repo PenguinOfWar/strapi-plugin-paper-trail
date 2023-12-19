@@ -8,7 +8,8 @@ import {
 } from '@strapi/design-system';
 import {
   useCMEditViewDataManager,
-  useFetchClient
+  useFetchClient,
+  useNotification
 } from '@strapi/helper-plugin';
 import { format, parseISO } from 'date-fns';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
@@ -17,13 +18,15 @@ import { useParams } from 'react-router-dom';
 
 import getTrad from '../../utils/getTrad';
 import getUser from '../../utils/getUser';
+import cleanData from '../../utils/cleanData';
 import PaperTrailViewer from '../PaperTrailViewer/PaperTrailViewer';
 
 function PaperTrail() {
   /**
    * Get the current schema
    */
-  const { layout, modifiedData, slug } = useCMEditViewDataManager();
+  const { layout, allLayoutData, initialData, modifiedData, slug } = useCMEditViewDataManager();
+  const toggleNotification = useNotification();
 
   const { uid, pluginOptions = {} } = layout;
 
@@ -103,7 +106,6 @@ function PaperTrail() {
 
   useEffect(() => {
     if (trails.length > 0) {
-      console.log(trails.find(trail => trail.change !== 'DRAFT'));
       setCurrent(trails.find(trail => trail.change !== 'DRAFT'));
     }
   }, [trails]);
@@ -117,16 +119,38 @@ function PaperTrail() {
     );
   };
 
+  const createFormData = React.useCallback(
+    (modifiedData, initialData) => {
+      const cleanedData = cleanData(
+        { browserState: modifiedData, serverState: initialData },
+        layout,
+        allLayoutData.components
+      );
+
+      return cleanedData;
+    },
+    [allLayoutData.components, layout]
+  );
+
   const handleSaveDraft = async () => {
     try {
-      const { data: response } = await request.post(
+      const data = createFormData(modifiedData, initialData);
+
+      await request.post(
         '/paper-trail/draft',
         {
           contentType: slug,
-          ...modifiedData
+          ...data
         }
       );
-      console.log(response);
+
+      toggleNotification({
+        type: 'success',
+        message: formatMessage({
+          id: getTrad('plugin.admin.paperTrail.draftSaved'),
+          defaultMessage: 'Draft version saved'
+        }),
+      });
     } catch (err) {
       console.error(err)
     }
