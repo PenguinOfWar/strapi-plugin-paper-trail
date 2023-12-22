@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import isEqual from 'lodash/isEqual';
 import isObject from 'lodash/isObject';
 
-const EXCLUDED_FIELDS = ['publishedAt'];
+const EXCLUDED_FIELDS = ['publishedAt', '__temp_key__'];
 
 const getTrailChangedFields = ({
   trail,
