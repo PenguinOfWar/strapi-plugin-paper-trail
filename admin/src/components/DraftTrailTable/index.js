@@ -92,7 +92,9 @@ export default function DraftTrailTable({ trails, pagination }) {
                 </Typography>
               </Td>
               <Td>
-                <TrailStatus status={entry.status} />
+                <Flex>
+                  <TrailStatus status={entry.status} />
+                </Flex>
               </Td>
               <Td>
                 <LinkButton
@@ -120,20 +122,20 @@ export default function DraftTrailTable({ trails, pagination }) {
 const TrailStatus = ({ status } = {}) => {
   if (status === 'approved')
     return (
-      <Status variant="success" showBullet={false}>
+      <Status size="S" variant="success" showBullet={false}>
         <Typography>Approved</Typography>
       </Status>
     );
 
   if (status === 'changes_required')
     return (
-      <Status variant="alternative" showBullet={false}>
+      <Status size="S" variant="alternative" showBullet={false}>
         <Typography>Reproved</Typography>
       </Status>
     );
 
   return (
-    <Status variant="secondary" showBullet={false}>
+    <Status size="S" variant="secondary" showBullet={false}>
       <Typography>Pending</Typography>
     </Status>
   );
