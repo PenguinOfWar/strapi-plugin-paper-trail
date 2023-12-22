@@ -5,6 +5,7 @@ import pluginPkg from '../../package.json';
 import CheckboxPT from './components/CheckboxPT/CheckboxPT';
 import Initializer from './components/Initializer';
 import PaperTrail from './components/PaperTrail/PaperTrail';
+import PluginIcon from './components/PluginIcon';
 import pluginId from './pluginId';
 import getTrad from './utils/getTrad';
 
@@ -12,6 +13,20 @@ const name = pluginPkg.strapi.name;
 
 export default {
   register(app) {
+    app.addMenuLink({
+      to: `/plugins/${pluginId}`,
+      icon: PluginIcon,
+      intlLabel: {
+        id: `${pluginId}.plugin.name`,
+        defaultMessage: 'Paper Trail'
+      },
+      Component: async () => {
+        const component = await import('./pages/App');
+        return component;
+      },
+      permissions: []
+    });
+
     app.registerPlugin({
       id: pluginId,
       initializer: Initializer,

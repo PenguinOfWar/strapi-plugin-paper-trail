@@ -1,19 +1,21 @@
-/*
- *
- * HomePage
- *
- */
-
+import { BaseHeaderLayout, Box } from '@strapi/design-system';
 import React from 'react';
-// import PropTypes from 'prop-types';
-import pluginId from '../../pluginId';
+
+import DraftTrailTable from '../../components/DraftTrailTable';
+import useGetDraftTrails from '../../hooks/useGetDraftTrails';
 
 const HomePage = () => {
+  const { data: trails } = useGetDraftTrails();
+
   return (
-    <div>
-      <h1>{pluginId}&apos;s HomePage</h1>
-      <p>Happy coding</p>
-    </div>
+    <Box background="neutral100" marginBottom={10}>
+      <BaseHeaderLayout
+        title="Paper Trail"
+        subtitle={trails ? `${trails.length} entities found` : undefined}
+        as="h2"
+      />
+      <DraftTrailTable trails={trails} />
+    </Box>
   );
 };
 

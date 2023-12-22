@@ -45,6 +45,13 @@ module.exports = {
       },
       comment: {
         type: 'text'
+      },
+      fieldComments: {
+        type: 'json'
+      },
+      status: {
+        type: 'enumeration',
+        enum: ['approved', 'changes_required']
       }
     }
   }
