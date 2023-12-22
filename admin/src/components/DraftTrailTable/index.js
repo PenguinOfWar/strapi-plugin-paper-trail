@@ -1,9 +1,7 @@
 import {
-  BaseCheckbox,
   Box,
   Flex,
-  IconButton,
-  Link,
+  LinkButton,
   Status,
   Table,
   Tbody,
@@ -14,6 +12,7 @@ import {
   Typography,
   VisuallyHidden
 } from '@strapi/design-system';
+import { PaginationURLQuery } from '@strapi/helper-plugin';
 import { Eye } from '@strapi/icons';
 import React from 'react';
 
@@ -21,8 +20,16 @@ import useContentTypes from '../../hooks/useContentTypes';
 import pluginId from '../../pluginId';
 import getTrailEntityName from '../../utils/getTrailEntityName';
 
-export default function DraftTrailTable({ trails }) {
-  const { contentTypesSettings } = useContentTypes();
+export default function DraftTrailTable({ trails, pagination }) {
+  const { contentTypesSettings, contentTypes } = useContentTypes();
+
+  const getContentTypeName = uid => {
+    if (!contentTypes?.length) return uid;
+
+    const contentType = contentTypes.find(type => type.uid === uid);
+
+    return contentType?.info?.displayName || uid;
+  };
 
   return (
     <Box paddingLeft={10} paddingRight={10} background="neutral100">
@@ -33,16 +40,16 @@ export default function DraftTrailTable({ trails }) {
               <Typography variant="sigma">ID</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Content Type</Typography>
+              <Typography variant="sigma">Type</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Entity</Typography>
+              <Typography variant="sigma">Name</Typography>
             </Th>
             <Th>
               <Typography variant="sigma">Version</Typography>
             </Th>
             <Th>
-              <Typography variant="sigma">Created By</Typography>
+              <Typography variant="sigma">Editor</Typography>
             </Th>
             <Th>
               <Typography variant="sigma">Updated At</Typography>
@@ -63,7 +70,7 @@ export default function DraftTrailTable({ trails }) {
               </Td>
               <Td>
                 <Typography textColor="neutral800">
-                  {entry.contentType}
+                  {getContentTypeName(entry.contentType)}
                 </Typography>
               </Td>
               <Td>
@@ -88,16 +95,24 @@ export default function DraftTrailTable({ trails }) {
                 <TrailStatus status={entry.status} />
               </Td>
               <Td>
-                <Flex>
-                  <Link to={`/plugins/${pluginId}/${entry.id}`}>
-                    <IconButton label="View" noBorder icon={<Eye />} />
-                  </Link>
-                </Flex>
+                <LinkButton
+                  size="S"
+                  variant="tertiary"
+                  startIcon={<Eye />}
+                  to={`/plugins/${pluginId}/${entry.id}`}
+                >
+                  View
+                </LinkButton>
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+      {pagination && (
+        <Flex justifyContent="end" marginTop={4}>
+          <PaginationURLQuery pagination={pagination} />
+        </Flex>
+      )}
     </Box>
   );
 }

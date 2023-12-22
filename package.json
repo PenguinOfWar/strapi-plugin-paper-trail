@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@strapi/design-system": "^1.6.3",
-    "@strapi/helper-plugin": "^4.6.0",
+    "@strapi/helper-plugin": "^4.16.2",
     "@strapi/icons": "^1.6.3",
     "path-to-regexp": "^6.2.1",
     "prop-types": "^15.7.2",
+    "qs": "^6.11.2",
     "react-query": "^3.39.3"
   },
   "devDependencies": {
