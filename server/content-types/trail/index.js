@@ -51,7 +51,8 @@ module.exports = {
       },
       status: {
         type: 'enumeration',
-        enum: ['approved', 'changes_required']
+        enum: ['pending', 'approved', 'changes_required'],
+        default: 'pending'
       }
     }
   }

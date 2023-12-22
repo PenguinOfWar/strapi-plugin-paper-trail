@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   LinkButton,
+  Loader,
   Status,
   Table,
   Tbody,
@@ -12,15 +13,18 @@ import {
   Typography,
   VisuallyHidden
 } from '@strapi/design-system';
-import { PaginationURLQuery } from '@strapi/helper-plugin';
+import { PaginationURLQuery, useQueryParams } from '@strapi/helper-plugin';
 import { Eye } from '@strapi/icons';
+import set from 'lodash/fp/set';
 import React from 'react';
 
 import useContentTypes from '../../hooks/useContentTypes';
 import pluginId from '../../pluginId';
 import getTrailEntityName from '../../utils/getTrailEntityName';
+import Tabs from './Tabs';
 
-export default function DraftTrailTable({ trails, pagination }) {
+export default function DraftTrailTable({ trails, pagination, loading }) {
+  const [{ query: params } = {}, setQuery] = useQueryParams({});
   const { contentTypesSettings, contentTypes } = useContentTypes();
 
   const getContentTypeName = uid => {
@@ -31,9 +35,44 @@ export default function DraftTrailTable({ trails, pagination }) {
     return contentType?.info?.displayName || uid;
   };
 
+  const selectedTab = params.filters?.$and
+    ?.map(filter => filter?.status?.$eq)
+    .find(Boolean);
+
+  const handleSelectTab = value => {
+    const filters = params.filters?.$and || [];
+    const currentFilterIndex = filters.findIndex(
+      filter => !!filter?.status?.$eq
+    );
+
+    const filter = {
+      status: {
+        $eq: value
+      }
+    };
+
+    const updatedParams = set(
+      [
+        'filters',
+        '$and',
+        currentFilterIndex === -1 ? filters.length : currentFilterIndex
+      ],
+      filter,
+      params
+    );
+
+    setQuery({
+      ...updatedParams,
+      page: 1
+    });
+  };
+
   return (
     <Box paddingLeft={10} paddingRight={10} background="neutral100">
-      <Table colCount={7} rowCount={trails?.length || 0}>
+      <Box marginBottom={4}>
+        <Tabs handleSelect={handleSelectTab} selected={selectedTab} />
+      </Box>
+      <Table colCount={8} rowCount={trails?.length || 0}>
         <Thead>
           <Tr>
             <Th>
@@ -63,6 +102,15 @@ export default function DraftTrailTable({ trails, pagination }) {
           </Tr>
         </Thead>
         <Tbody>
+          {loading && (
+            <Tr>
+              <Td colSpan={8}>
+                <Flex padding={4} justifyContent="center">
+                  <Loader />
+                </Flex>
+              </Td>
+            </Tr>
+          )}
           {trails?.map(entry => (
             <Tr key={entry.id}>
               <Td>

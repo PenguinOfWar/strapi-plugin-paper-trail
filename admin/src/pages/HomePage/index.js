@@ -1,16 +1,40 @@
 import { BaseHeaderLayout, Box } from '@strapi/design-system';
 import { useQueryParams } from '@strapi/helper-plugin';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import DraftTrailTable from '../../components/DraftTrailTable';
 import useGetDraftTrails from '../../hooks/useGetDraftTrails';
 
 const HomePage = () => {
-  const [{ query: params } = {}] = useQueryParams({
-    page: 1,
-    pageSize: 10
-  });
-  const { data: { results: trails, pagination } = {} } = useGetDraftTrails({ params });
+  const [{ query: params } = {}, setQuery] = useQueryParams(null);
+  const { data: { results: trails, pagination } = {}, isLoading } =
+    useGetDraftTrails({
+      params
+    });
+
+  useEffect(() => {
+    if (params === null) {
+      setQuery({
+        page: 1,
+        pageSize: 10,
+        sort: 'updatedAt:asc',
+        filters: {
+          $and: [
+            {
+              change: {
+                $eq: 'DRAFT'
+              }
+            },
+            {
+              status: {
+                $eq: 'pending'
+              }
+            }
+          ]
+        }
+      });
+    }
+  }, []);
 
   return (
     <Box background="neutral100" marginBottom={10}>
@@ -19,7 +43,11 @@ const HomePage = () => {
         subtitle={`${pagination?.total || 0} entities found`}
         as="h2"
       />
-      <DraftTrailTable trails={trails} pagination={pagination} />
+      <DraftTrailTable
+        trails={trails}
+        pagination={pagination}
+        loading={isLoading}
+      />
     </Box>
   );
 };
