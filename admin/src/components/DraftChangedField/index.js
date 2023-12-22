@@ -124,7 +124,7 @@ const DraftChangedField = ({
     );
   }
 
-  const mapValue = v => (isObject(v) ? JSON.stringify(v) : v || '');
+  const mapValue = v => (isObject(v) ? JSON.stringify(v) : v?.toString() || '');
 
   const Input = TEXTAREA_TYPES.includes(type) ? Textarea : TextInput;
 

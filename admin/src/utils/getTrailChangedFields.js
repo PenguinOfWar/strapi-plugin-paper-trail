@@ -96,8 +96,9 @@ const getTrailChangedFields = ({
           break;
       }
 
+      const isEmptyValue = cleanedValue === null || cleanedValue === undefined;
       const isEmptyObject = isObject(cleanedValue) && isEmpty(cleanedValue);
-      if (!cleanedValue || isEmptyObject) return acc;
+      if (isEmptyValue || isEmptyObject) return acc;
 
       acc[current] = cleanedValue;
 

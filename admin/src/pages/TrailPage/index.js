@@ -10,6 +10,7 @@ import {
 } from '@strapi/design-system';
 import { ArrowLeft, Check, Eye } from '@strapi/icons';
 import set from 'lodash/fp/set';
+import isEmpty from 'lodash/isEmpty';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -159,6 +160,8 @@ const TrailPage = () => {
         >
           {trail.status === 'approved' ? (
             <Typography>Changes applied, no diffs to display</Typography>
+          ) : isEmpty(changedFields) ? (
+            <Typography>No changes to display</Typography>
           ) : (
             <Flex direction="column" gap={6} alignItems="stretch">
               {changedFields &&
