@@ -105,7 +105,7 @@ const TrailStatus = ({ status } = {}) => {
   if (status === 'changes_required')
     return (
       <Status variant="alternative" showBullet={false}>
-        <Typography>Changes required</Typography>
+        <Typography>Reproved</Typography>
       </Status>
     );
 

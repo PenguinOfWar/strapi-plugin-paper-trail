@@ -118,7 +118,7 @@ const TrailPage = () => {
           primaryAction={
             <Flex gap={2}>
               <Button variant="secondary" onClick={handleRequestChanges}>
-                Request changes
+                Comment and reprove
               </Button>
               <Button startIcon={<Check />} onClick={handleApplyTrail}>
                 Approve and apply changes

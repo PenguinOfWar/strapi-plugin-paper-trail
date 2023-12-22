@@ -15,6 +15,7 @@ import React from 'react';
 import MediaField from './MediaField';
 
 const IGNORE_FIELDS = ['id'];
+const TEXTAREA_TYPES = ['text', 'richtext', 'json'];
 
 const DraftChangedField = ({
   level = 0,
@@ -67,8 +68,6 @@ const DraftChangedField = ({
       </Wrapper>
     );
   }
-
-  const mapValue = v => (isObject(v) ? JSON.stringify(v) : v || '');
 
   if (type === 'relation') {
     return (
@@ -125,7 +124,9 @@ const DraftChangedField = ({
     );
   }
 
-  const Input = type === 'text' || type === 'richtext' ? Textarea : TextInput;
+  const mapValue = v => (isObject(v) ? JSON.stringify(v) : v || '');
+
+  const Input = TEXTAREA_TYPES.includes(type) ? Textarea : TextInput;
 
   return (
     <Wrapper
