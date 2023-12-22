@@ -45,6 +45,9 @@ export default function DraftTrailTable({ trails }) {
               <Typography variant="sigma">Created By</Typography>
             </Th>
             <Th>
+              <Typography variant="sigma">Updated At</Typography>
+            </Th>
+            <Th>
               <Typography variant="sigma">Status</Typography>
             </Th>
             <Th>
@@ -74,6 +77,11 @@ export default function DraftTrailTable({ trails }) {
               <Td>
                 <Typography textColor="neutral800">
                   {entry.admin_user.firstname} {entry.admin_user.lastname}
+                </Typography>
+              </Td>
+              <Td>
+                <Typography textColor="neutral800">
+                  {new Date(entry.updatedAt).toLocaleString()}
                 </Typography>
               </Td>
               <Td>

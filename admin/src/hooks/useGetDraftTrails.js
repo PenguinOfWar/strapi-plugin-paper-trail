@@ -7,14 +7,14 @@ export default function useGetDraftTrails() {
     const requestUri = [
       '/content-manager/collection-types/plugin::paper-trail.trail?page=1',
       'pageSize=999',
-      'sort=version:DESC',
+      'sort=updatedAt:asc',
       'filters[$and][0][change][$eq]=DRAFT'
     ].join('&');
 
     const { data = {} } = await get(requestUri);
-    const { results = [] } = data;
+    const { results = [], pagination } = data;
 
-    return results;
+    return { results, pagination };
   });
 
   return query;
