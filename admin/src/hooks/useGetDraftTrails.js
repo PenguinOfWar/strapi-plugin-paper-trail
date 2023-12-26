@@ -1,5 +1,4 @@
 import { useFetchClient } from '@strapi/helper-plugin';
-import merge from 'lodash/merge';
 import qs from 'qs';
 import { useQuery } from 'react-query';
 

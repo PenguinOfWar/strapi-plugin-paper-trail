@@ -13,6 +13,7 @@ import isObject from 'lodash/isObject';
 import React from 'react';
 
 import MediaField from './MediaField';
+import RelationField from './RelationField';
 
 const IGNORE_FIELDS = ['id'];
 const TEXTAREA_TYPES = ['text', 'richtext', 'json'];
@@ -70,6 +71,8 @@ const DraftChangedField = ({
   }
 
   if (type === 'relation') {
+    const target = get(schema, ['attributes', path, 'targetModel']);
+  
     return (
       <Wrapper
         label={path}
@@ -78,32 +81,7 @@ const DraftChangedField = ({
         comment={get(comments, fullPath, null)}
         onCommentChange={onCommentChange}
       >
-        <Flex gap={6} alignItems="start">
-          {!!value.connect.length && (
-            <Box>
-              <Typography>Connect:</Typography>
-              <ul>
-                {value.connect.map(item => (
-                  <li key={item.id}>
-                    <Typography>- ID {item.id}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </Box>
-          )}
-          {!!value.disconnect.length && (
-            <Box>
-              <Typography>Disconnect:</Typography>
-              <ul>
-                {value.disconnect.map(item => (
-                  <li key={item.id}>
-                    <Typography>- {item.id}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </Box>
-          )}
-        </Flex>
+        <RelationField value={value} targetContentType={target} />
       </Wrapper>
     );
   }

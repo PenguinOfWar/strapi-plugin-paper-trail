@@ -133,7 +133,7 @@ const TrailPage = () => {
               size="S"
               variant="tertiary"
               startIcon={<Eye />}
-              to={`/content-manager/collectionType/${trail.contentType}/${trail.recordId}`}
+              href={`/content-manager/collectionType/${trail.contentType}/${trail.recordId}`}
             >
               View entity
             </LinkButton>
