@@ -27,6 +27,10 @@ const Tabs = ({ handleSelect, selected }) => {
 
 const statusTabs = [
   {
+    label: 'All',
+    value: undefined,
+  },
+  {
     label: 'Pending',
     value: 'pending'
   },
