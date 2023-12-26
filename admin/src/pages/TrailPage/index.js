@@ -2,7 +2,6 @@ import {
   BaseHeaderLayout,
   Box,
   Button,
-  EmptyStateLayout,
   Flex,
   Link,
   LinkButton,
@@ -23,7 +22,7 @@ import useUpdatePaperTrail from '../../hooks/useUpdatePaperTrail';
 import pluginId from '../../pluginId';
 import getTrailChangedFields from '../../utils/getTrailChangedFields';
 import getTrailEntityName from '../../utils/getTrailEntityName';
-import { LoadingIndicatorPage } from '@strapi/helper-plugin';
+import { LoadingIndicatorPage, NoContent } from '@strapi/helper-plugin';
 
 const TrailPage = () => {
   const { id } = useParams();
@@ -97,7 +96,7 @@ const TrailPage = () => {
   if (!isLoadingTrail && !trail) {
     return (
       <Box padding={8} background="neutral100">
-        <EmptyStateLayout content="Paper Trail not found" />
+        <NoContent />
       </Box>
     );
   }

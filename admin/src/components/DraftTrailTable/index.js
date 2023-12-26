@@ -81,25 +81,11 @@ export default function DraftTrailTable({ trails, pagination, loading }) {
             </Th>
           </Tr>
         </Thead>
-        <Tbody>
-          {loading ? (
-            <Tr>
-              <Td colSpan={8}>
-                <Flex padding={4} justifyContent="center">
-                  <Loader />
-                </Flex>
-              </Td>
-            </Tr>
-          ) : trails?.length === 0 ? (
-            <Tr>
-              <Td colSpan={8}>
-                <Flex padding={4} justifyContent="center">
-                  <EmptyBodyTable />
-                </Flex>
-              </Td>
-            </Tr>
-          ) : (
-            trails?.map(entry => (
+        {!trails || trails?.length === 0 ? (
+          <EmptyBodyTable colSpan={8} isLoading={loading} />
+        ) : (
+          <Tbody>
+            {trails?.map(entry => (
               <Tr key={entry.id}>
                 <Td>
                   <Typography textColor="neutral800">{entry.id}</Typography>
@@ -145,9 +131,9 @@ export default function DraftTrailTable({ trails, pagination, loading }) {
                   </LinkButton>
                 </Td>
               </Tr>
-            ))
-          )}
-        </Tbody>
+            ))}
+          </Tbody>
+        )}
       </Table>
       {pagination && (
         <Flex justifyContent="end" marginTop={4}>

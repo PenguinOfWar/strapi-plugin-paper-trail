@@ -34,7 +34,7 @@ const HomePage = () => {
         }
       });
     }
-  }, []);
+  }, [params]);
 
   return (
     <Box background="neutral100" marginBottom={10}>
