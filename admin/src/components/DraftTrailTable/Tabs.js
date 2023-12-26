@@ -9,19 +9,16 @@ const Tabs = ({ handleSelect, selected }) => {
         const isSelected = selected === value;
 
         return (
-          <SimpleTabBox
-            key={`tab-${value}`}
-            onClick={() => handleSelect?.(value)}
-            padding={4}
-            selected={isSelected}
-          >
-            <Typography
-              variant="sigma"
-              textColor={isSelected ? 'primary600' : 'neutral600'}
-            >
-              {label}
-            </Typography>
-          </SimpleTabBox>
+          <button key={`tab-${value}`} onClick={() => handleSelect?.(value)}>
+            <SimpleTabBox padding={4} selected={isSelected}>
+              <Typography
+                variant="sigma"
+                textColor={isSelected ? 'primary600' : 'neutral600'}
+              >
+                {label}
+              </Typography>
+            </SimpleTabBox>
+          </button>
         );
       })}
     </Flex>

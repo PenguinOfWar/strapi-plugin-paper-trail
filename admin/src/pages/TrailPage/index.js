@@ -23,6 +23,7 @@ import useUpdatePaperTrail from '../../hooks/useUpdatePaperTrail';
 import pluginId from '../../pluginId';
 import getTrailChangedFields from '../../utils/getTrailChangedFields';
 import getTrailEntityName from '../../utils/getTrailEntityName';
+import { LoadingIndicatorPage } from '@strapi/helper-plugin';
 
 const TrailPage = () => {
   const { id } = useParams();
@@ -89,7 +90,9 @@ const TrailPage = () => {
     applyTrail({ trail });
   };
 
-  if (isLoadingTrail) return;
+  const isLoading = isLoadingContentTypes || isLoadingTrail;
+
+  if (isLoading) return <LoadingIndicatorPage />;
 
   if (!isLoadingTrail && !trail) {
     return (
