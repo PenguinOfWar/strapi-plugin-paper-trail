@@ -1,37 +1,16 @@
 {
   "name": "strapi-plugin-paper-trail",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Accountability and content versioning for strapi v4+",
-  "strapi": {
-    "name": "paper-trail",
-    "description": "Accountability and content versioning for strapi v4+",
-    "kind": "plugin",
-    "displayName": "Paper Trail"
+  "homepage": "https://github.com/PenguinOfWar/strapi-plugin-paper-trail#readme",
+  "bugs": {
+    "url": "https://github.com/PenguinOfWar/strapi-plugin-paper-trail/issues"
   },
-  "dependencies": {
-    "@strapi/design-system": "^1.6.3",
-    "@strapi/helper-plugin": "^4.6.0",
-    "@strapi/icons": "^1.6.3",
-    "path-to-regexp": "^6.2.1",
-    "prop-types": "^15.7.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PenguinOfWar/strapi-plugin-paper-trail.git"
   },
-  "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "jest": "^29.5.0",
-    "leasot": "^13.3.0",
-    "prettier": "^2.8.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.6"
-  },
-  "peerDependencies": {
-    "@strapi/strapi": "^4.10.7",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0",
-    "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.3"
-  },
+  "license": "MIT",
   "author": {
     "name": "Darryl Walker",
     "email": "darryljwalker@me.com"
@@ -47,21 +26,42 @@
       "url": "https://github.com/Brianggalvez"
     }
   ],
-  "engines": {
-    "node": ">=14.19.1 <=20.x.x",
-    "npm": ">=6.0.0"
-  },
-  "license": "MIT",
   "scripts": {
     "test": "jest",
     "todo": "leasot -x --reporter markdown '{admin,server}/**/*' --ignore '**/*.+(jpg|jpeg|gif|png|svg|json)' > todo.md"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PenguinOfWar/strapi-plugin-paper-trail.git"
+  "dependencies": {
+    "@strapi/design-system": "^1.6.3",
+    "@strapi/helper-plugin": "^4.16.2",
+    "@strapi/icons": "^1.6.3",
+    "path-to-regexp": "^6.2.1",
+    "prop-types": "^15.7.2"
   },
-  "bugs": {
-    "url": "https://github.com/PenguinOfWar/strapi-plugin-paper-trail/issues"
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "jest": "^29.5.0",
+    "leasot": "^13.3.0",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.6"
   },
-  "homepage": "https://github.com/PenguinOfWar/strapi-plugin-paper-trail#readme"
+  "peerDependencies": {
+    "@strapi/strapi": "^4.16.2",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "name": "paper-trail",
+    "description": "Accountability and content versioning for strapi v4+",
+    "kind": "plugin",
+    "displayName": "Paper Trail"
+  }
 }
