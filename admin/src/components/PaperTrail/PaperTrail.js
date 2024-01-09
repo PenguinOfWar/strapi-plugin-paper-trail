@@ -31,41 +31,61 @@ function PaperTrail() {
 
   const paperTrailEnabled = pluginOptions?.paperTrail?.enabled;
 
+  // TODO: add this to config/plugins.ts, needs a custom endpoint
+  // https://forum.strapi.io/t/custom-field-settings/23068
+  const pageSize = 15;
+
   const request = useFetchClient();
 
   const [trails, setTrails] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(false);
   const [current, setCurrent] = useState(null);
   const [error, setError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    async function getTrails() {
-      // TODO: Add pagination to this so it doesn't get out of hand
+    async function getTrails(page, pageSize) {
+      const params = new URLSearchParams({
+        page,
+        pageSize,
+        sort: 'version:DESC',
+        'filters[$and][0][contentType][$eq]': uid,
+        'filters[$and][1][recordId][$eq]': id
+      });
 
-      const requestUri = [
-        '/content-manager/collection-types/plugin::paper-trail.trail?page=1',
-        'pageSize=999',
-        'sort=version:DESC',
-        `filters[$and][0][contentType][$eq]=${uid}&filters[$and][1][recordId][$eq]=${id}`
-      ].join('&');
+      const requestUri = `/content-manager/collection-types/plugin::paper-trail.trail?${params}`;
 
       try {
         const result = await request.get(requestUri);
 
         const { data = {} } = result;
 
-        const { results = [] } = data;
+        const { results = [], pagination } = data;
 
+        const { total, pageCount } = pagination;
+
+        setTotal(total);
+        setPageCount(pageCount);
         setTrails(results);
+
+        if (page === 1 && total > 0) {
+          setCurrent(results[0]);
+        }
+
         setLoaded(true);
+        setInitialLoad(true);
       } catch (Err) {
         console.warn('paper-trail: ', Err);
         setError(Err);
       }
     }
+
     if (!loaded) {
-      getTrails();
+      getTrails(page, pageSize);
     }
   }, [loaded, uid, id]);
 
@@ -75,8 +95,15 @@ function PaperTrail() {
 
   const handler = useCallback(() => {
     setTimeout(() => {
+      setPage(1);
       setLoaded(false);
+      setInitialLoad(false);
     }, 1000);
+  }, []);
+
+  const handleSetPage = useCallback(newPage => {
+    setPage(newPage);
+    setLoaded(false);
   }, []);
 
   /**
@@ -96,23 +123,11 @@ function PaperTrail() {
     }
   }, [handler]);
 
-  /**
-   * When paper trails are updated take the top one and pin it as current
-   */
-
-  useEffect(() => {
-    if (trails.length > 0) {
-      setCurrent(trails[0]);
-    }
-  }, [trails]);
-
   if (!paperTrailEnabled) {
     return <Fragment />;
   }
 
   // TODO: Add diff comparison
-  // TODO: Add pagination
-  // TODO: Add support for deleted record audit trails
   // TODO: Add up/down for changing UIDs and enabling/disabling plugin
 
   return (
@@ -142,9 +157,9 @@ function PaperTrail() {
         <Box paddingTop={2} paddingBottom={4}>
           <Divider />
         </Box>
-        {loaded ? (
+        {initialLoad ? (
           <Fragment>
-            {trails.length === 0 && (
+            {total === 0 && (
               <Typography fontWeight="bold">
                 {formatMessage({
                   id: getTrad('plugin.admin.paperTrail.noTrails'),
@@ -152,7 +167,7 @@ function PaperTrail() {
                 })}
               </Typography>
             )}
-            {trails.length > 0 && current && (
+            {total > 0 && current && (
               <Fragment>
                 <p>
                   <Typography fontWeight="bold">
@@ -160,7 +175,7 @@ function PaperTrail() {
                       id: getTrad('plugin.admin.paperTrail.currentVersion'),
                       defaultMessage: 'Current version:'
                     })}{' '}
-                    {trails.length}
+                    {total}
                   </Typography>
                 </p>
                 <p>
@@ -206,6 +221,11 @@ function PaperTrail() {
         trails={trails}
         error={error}
         setError={setError}
+        page={page}
+        pageSize={pageSize}
+        pageCount={pageCount}
+        total={total}
+        setPage={handleSetPage}
       />
     </Fragment>
   );

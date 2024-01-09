@@ -27,7 +27,18 @@ import PaperTrailReview from '../PaperTrailReview/PaperTrailReview';
 import TrailTable from '../TrailTable/TrailTable';
 
 function PaperTrailViewer(props) {
-  const { visible, setVisible, trails, setError, error } = props;
+  const {
+    visible,
+    setVisible,
+    trails,
+    setError,
+    error,
+    page,
+    pageSize,
+    total,
+    pageCount,
+    setPage
+  } = props;
   const [viewRevision, setViewRevision] = useState(null);
   const [revisedFields, setRevisedFields] = useState([]);
   const [showReviewStep, setShowReviewStep] = useState(false);
@@ -128,6 +139,11 @@ function PaperTrailViewer(props) {
               <TrailTable
                 trails={trails}
                 setViewRevision={handleSetViewRevision}
+                page={page}
+                pageSize={pageSize}
+                total={total}
+                pageCount={pageCount}
+                setPage={setPage}
               />
             )}
             {viewRevision && !showReviewStep && (
@@ -223,6 +239,11 @@ PaperTrailViewer.propTypes = {
   setVisible: PropTypes.func.isRequired,
   error: PropTypes.any,
   setError: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
   trails: PropTypes.arrayOf(
     PropTypes.shape({
       change: PropTypes.string,
