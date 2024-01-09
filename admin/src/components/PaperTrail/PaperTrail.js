@@ -55,7 +55,7 @@ function PaperTrail() {
         sort: 'version:DESC',
         'filters[$and][0][contentType][$eq]': uid,
         'filters[$and][1][recordId][$eq]': id
-      });
+      }).toString();
 
       const requestUri = `/content-manager/collection-types/plugin::paper-trail.trail?${params}`;
 
