@@ -108,7 +108,7 @@ Clicking 'Restore' will then immediately overwrite the selected fields on the or
 
 While I have tried to keep the plugin as simple and intuitive to use as possible, there are some notes and considerations to mention. Some of these are `strapi` specific, some are specific to the challenge of version control, and others are plugin specific challenges.
 
-1. The plugin has currently only been tested on `node v18`, though it should work perfectly on any node version that `strapi v4` directly supports (currently `node v14` and up).
+1. The plugin has currently only been tested on `node v18` and `node v20`, though it should work perfectly on any node version that `strapi v4` directly supports (currently `node v14` and up).
 2. The plugin relies on the content type plugin `UID` property to identify the correct content type and associate the revision history. If you change this value you will lose previous revision histories (all revision history records can be manually browsed and modified from `Content Manager > Collection Types > Trail`).
 3. This has not been tested with all available custom field plugins, however as long as the custom field plugin implements on top of the core strapi content manager types (e.g. `string`, `text`, `biginteger`, `json`, `component`, and so on) and isn't doing anything too arcane, then it should be fine.
 4. The plugin is a middleware listening on the admin and user content management endpoints. Making changes directly to the records outside of this scope (e.g. from a custom service or controller) will not be logged as a revision by the plugin, however it shouldn't be difficult to manually implement this if needed.
@@ -125,10 +125,9 @@ In no particular order and subject to change depending on priorities.
 1. Compare diffs against current vs chosen revision, or two separate revisions.
 2. Restoration for records deleted by `DELETE` event.
 3. Small enhancements to better leverage available `strapi` server hooks instead of custom code.
-4. Pagination for longer revision history lists.
+4. Better support for only logging changed fields (currently the `strapi` admin sends the entire record back and not just the changes fields) to reduce revision noise.
 5. Plugin management panel for purging revision history.
 6. Selecting which field to send the revised change to on the record (supporting schema name changes).
-7. Better support for only logging changed fields (currently the `strapi` admin sends the entire record back and not just the changes fields) to reduce revision noise.
 
 ## Support
 
