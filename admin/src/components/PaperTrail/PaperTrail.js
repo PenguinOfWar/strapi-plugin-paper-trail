@@ -84,7 +84,7 @@ function PaperTrail() {
       }
     }
 
-    if (!loaded) {
+    if (!loaded && paperTrailEnabled && id) {
       getTrails(page, pageSize);
     }
   }, [loaded, uid, id]);
