@@ -1,7 +1,14 @@
-import { Box, Typography } from '@strapi/design-system';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionToggle,
+  Box,
+  JSONInput,
+  Typography
+} from '@strapi/design-system';
 import { useCMEditViewDataManager } from '@strapi/helper-plugin';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import prepareTrailFromSchema from '../../../../server/utils/prepareTrailFromSchema';
@@ -16,6 +23,7 @@ function RevisionForm(props) {
   const { layout } = useCMEditViewDataManager();
 
   const { formatMessage } = useIntl();
+  const [expanded, setExpanded] = useState(false);
 
   /**
    * trim ignored props and anything not in the current schema
@@ -44,6 +52,27 @@ function RevisionForm(props) {
           />
         ))}
       </form>
+      {/* raw json */}
+      <Box padding={4} background="neutral100">
+        <Accordion
+          expanded={expanded}
+          onToggle={() => setExpanded(s => !s)}
+          id="acc-field-pt-raw"
+        >
+          <AccordionToggle
+            togglePosition="right"
+            title={formatMessage({
+              id: getTrad('plugin.admin.paperTrail.viewRawJson'),
+              defaultMessage: 'View JSON'
+            })}
+          />
+          <AccordionContent>
+            <Box padding={3}>
+              <JSONInput value={JSON.stringify(trimmedContent, null, 2)} />
+            </Box>
+          </AccordionContent>
+        </Accordion>
+      </Box>
     </Fragment>
   );
 }

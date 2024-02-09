@@ -1,5 +1,3 @@
-'use strict';
-
 const middlewares = require('./middlewares');
 const userPermissionSchema = require('./content-types/trail/user-permissions');
 

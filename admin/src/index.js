@@ -10,7 +10,7 @@ import getTrad from './utils/getTrad';
 
 const name = pluginPkg.strapi.name;
 
-export default {
+const App = {
   register(app) {
     app.registerPlugin({
       id: pluginId,
@@ -90,3 +90,5 @@ export default {
     return Promise.resolve(importedTrads);
   }
 };
+
+export default App;

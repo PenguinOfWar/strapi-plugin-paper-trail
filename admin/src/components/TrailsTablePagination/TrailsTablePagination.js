@@ -14,12 +14,15 @@ function TrailsTablePagination(props) {
 
   const pageList = getPaginationList(page, pageCount);
 
-  const handleClick = useCallback((event, newPage) => {
-    event.preventDefault();
-    if (page !== newPage) {
-      setPage(newPage);
-    }
-  });
+  const handleClick = useCallback(
+    (event, newPage) => {
+      event.preventDefault();
+      if (page !== newPage) {
+        setPage(newPage);
+      }
+    },
+    [page, setPage]
+  );
 
   return (
     <Pagination activePage={page} pageCount={pageCount}>

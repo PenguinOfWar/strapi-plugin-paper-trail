@@ -35,7 +35,7 @@
   "plugin.admin.paperTrail.review": "Revisar",
   "plugin.admin.paperTrail.reviewChanges": "Revisar mudanças",
   "plugin.admin.paperTrail.reviewChangesDescription": "Revise cuidadosamente as mudanças abaixo. Ao clicar em 'Restaurar', o registro será atualizado instantaneamente com os valores selecionados.",
-  "plugin.admin.paperTrail.viewRawJson": "Ver JSON bruto",
+  "plugin.admin.paperTrail.viewRawJson": "Ver JSON",
   "plugin.admin.paperTrail.revisionExplanation": "Selecione propriedades da lista abaixo para restaurar desta revisão. Você terá a chance de revisar antes de confirmar.",
   "plugin.admin.paperTrail.restore": "Restaurar",
   "plugin.admin.paperTrail.error": "Erro"

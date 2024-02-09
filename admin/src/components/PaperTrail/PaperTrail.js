@@ -89,7 +89,7 @@ function PaperTrail() {
     } else {
       setInitialLoad(true);
     }
-  }, [loaded, uid, id]);
+  }, [loaded, uid, id, page, paperTrailEnabled, request]);
 
   /**
    * event listener for submit button

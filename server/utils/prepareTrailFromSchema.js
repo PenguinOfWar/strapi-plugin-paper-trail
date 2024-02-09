@@ -25,6 +25,8 @@ module.exports = (update, schema) => {
       } else {
         ignored[key] = update[key];
       }
+
+      return key;
     });
   }
 

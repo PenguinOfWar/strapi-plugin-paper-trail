@@ -1,0 +1,26 @@
+{
+  "plugins": ["prettier"],
+  "extends": ["react-app", "prettier"],
+  "globals": {
+    "strapi": true
+  },
+  "rules": {
+    "eqeqeq": ["error", "always"],
+    "@typescript-eslint/no-unused-vars": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      {
+        "props": "never",
+        "children": "never",
+        "propElementValues": "always"
+      }
+    ]
+  }
+}
