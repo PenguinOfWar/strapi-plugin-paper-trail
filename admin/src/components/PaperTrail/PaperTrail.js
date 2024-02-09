@@ -86,6 +86,8 @@ function PaperTrail() {
 
     if (!loaded && paperTrailEnabled && id) {
       getTrails(page, pageSize);
+    } else {
+      setInitialLoad(true);
     }
   }, [loaded, uid, id]);
 
