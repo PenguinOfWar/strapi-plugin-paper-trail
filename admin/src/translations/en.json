@@ -35,7 +35,7 @@
   "plugin.admin.paperTrail.review": "Review",
   "plugin.admin.paperTrail.reviewChanges": "Review changes",
   "plugin.admin.paperTrail.reviewChangesDescription": "Review the below changes carefully. Upon clicking 'Restore' the record will be instantly updated with the selected values.",
-  "plugin.admin.paperTrail.viewRawJson": "View Raw JSON",
+  "plugin.admin.paperTrail.viewRawJson": "View JSON",
   "plugin.admin.paperTrail.revisionExplanation": "Select properties from the below list to restore from this revision. You will have the chance to review before committing.",
   "plugin.admin.paperTrail.restore": "Restore",
   "plugin.admin.paperTrail.error": "Error"

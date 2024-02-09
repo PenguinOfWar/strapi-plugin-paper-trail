@@ -62,7 +62,7 @@ function RenderField(props) {
               disabled={true}
               name={`datetimepicker-${name}`}
               step={15}
-              selectedDateLabel={() => `Date picker, current is undefined`}
+              selectedDateLabel={() => 'Date picker, current is undefined'}
               value={value}
             />
           )}

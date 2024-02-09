@@ -50,7 +50,7 @@ function PaperTrailViewer(props) {
     setViewRevision(null);
     setRevisedFields([]);
     setShowReviewStep(false);
-  }, [visible]);
+  }, [visible, setVisible]);
 
   const handleSetViewRevision = useCallback(viewRevisionState => {
     setRevisedFields([]);
@@ -110,12 +110,12 @@ function PaperTrailViewer(props) {
       const requestUri = `/content-manager/collection-types/${contentType}/${recordId}`;
       await request.put(requestUri, payload);
 
-      location.reload();
+      window.location.reload();
     } catch (Err) {
       setError(Err);
       console.warn('paper-trail:', Err);
     }
-  }, [layout, viewRevision, revisedFields]);
+  }, [layout, viewRevision, revisedFields, request, setError]);
 
   return (
     <Fragment>

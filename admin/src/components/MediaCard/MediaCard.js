@@ -60,7 +60,7 @@ function MediaCard(props) {
     }
 
     fetchData();
-  }, [id]);
+  }, [id, formatMessage, request]);
 
   return (
     <GridItem col={4}>

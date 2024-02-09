@@ -1,5 +1,3 @@
-'use strict';
-
 const register = require('./register');
 const bootstrap = require('./bootstrap');
 const destroy = require('./destroy');

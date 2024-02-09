@@ -1,5 +1,3 @@
-'use strict';
-
 const prepareTrailFromSchema = require('../utils/prepareTrailFromSchema');
 const entityName = require('../utils/entityName');
 

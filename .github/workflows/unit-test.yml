@@ -25,4 +25,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g npm@9
       - run: npm ci
+      - run: npm run lint
       - run: CI=true npm run test

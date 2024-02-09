@@ -37,7 +37,7 @@ function PaperTrailReview(props) {
     let changePayloadObj = buildPayload(trimmedContent, revisedFields);
 
     setChangePayload(changePayloadObj);
-  }, [trimmedContent]);
+  }, [trimmedContent, revisedFields]);
 
   return (
     <Fragment>
@@ -93,7 +93,7 @@ function PaperTrailReview(props) {
             togglePosition="right"
             title={formatMessage({
               id: getTrad('plugin.admin.paperTrail.viewRawJson'),
-              defaultMessage: 'View Raw JSON'
+              defaultMessage: 'View JSON'
             })}
           />
           <AccordionContent>

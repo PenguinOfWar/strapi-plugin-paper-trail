@@ -137,7 +137,7 @@ function TrailTable(props) {
         </Fragment>
       )}
       {!trails ||
-        (trails.length == 0 && (
+        (trails.length === 0 && (
           <Typography variant="beta">
             {formatMessage({
               id: getTrad('plugin.admin.paperTrail.noTrails'),

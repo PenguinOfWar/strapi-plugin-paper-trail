@@ -20,6 +20,8 @@ module.exports = (contentTypeUid, isAdmin) => {
       if (innerEntry.info.pluralName === contentTypeUid) {
         return entry;
       }
+
+      return false;
     });
 
     if (!schema) {

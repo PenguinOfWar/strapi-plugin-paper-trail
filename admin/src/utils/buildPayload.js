@@ -6,6 +6,8 @@ export default function buildPayload(trimmedContent, revisedFields) {
       if (trimmedContent[field]) {
         changePayloadObj[field] = trimmedContent[field];
       }
+
+      return field;
     });
   }
 
