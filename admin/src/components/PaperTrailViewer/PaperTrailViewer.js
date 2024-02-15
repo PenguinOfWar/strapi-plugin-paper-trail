@@ -37,7 +37,8 @@ function PaperTrailViewer(props) {
     pageSize,
     total,
     pageCount,
-    setPage
+    setPage,
+    collectionType
   } = props;
   const [viewRevision, setViewRevision] = useState(null);
   const [revisedFields, setRevisedFields] = useState([]);
@@ -107,7 +108,11 @@ function PaperTrailViewer(props) {
     const payload = buildPayload(trimmedContent, revisedFields);
 
     try {
-      const requestUri = `/content-manager/collection-types/${contentType}/${recordId}`;
+      const requestUri =
+        collectionType === 'single-types'
+          ? `/content-manager/${collectionType}/${contentType}`
+          : `/content-manager/${collectionType}/${contentType}/${recordId}`;
+
       await request.put(requestUri, payload);
 
       window.location.reload();
@@ -115,7 +120,7 @@ function PaperTrailViewer(props) {
       setError(Err);
       console.warn('paper-trail:', Err);
     }
-  }, [layout, viewRevision, revisedFields, request, setError]);
+  }, [layout, viewRevision, revisedFields, request, setError, collectionType]);
 
   return (
     <Fragment>

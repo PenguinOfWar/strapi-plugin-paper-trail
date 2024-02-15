@@ -27,7 +27,10 @@ function PaperTrail() {
   const { uid, pluginOptions = {} } = layout;
 
   const { formatMessage } = useIntl();
-  const { id } = useParams();
+  // params works for collection types but not single types
+  const { id, collectionType } = useParams();
+
+  const [recordId, setRecordId] = useState(id);
 
   const paperTrailEnabled = pluginOptions?.paperTrail?.enabled;
 
@@ -47,6 +50,34 @@ function PaperTrail() {
   const [total, setTotal] = useState(0);
   const [pageCount, setPageCount] = useState(1);
 
+  // if collectionType is single then fetch the ID (if exists) from the server and set `1` if nothing.
+
+  const getSingleTypeId = useCallback(async () => {
+    const requestUri = `/content-manager/single-types/${uid}/`;
+
+    try {
+      const result = await request.get(requestUri);
+
+      const { data = {} } = result;
+
+      const { id } = data;
+
+      setRecordId(id);
+
+      return id;
+    } catch (err) {
+      console.warn('paper-trail:', 'No existing single type for this UID', err);
+    }
+
+    return null;
+  }, [uid, request]);
+
+  useEffect(() => {
+    if (collectionType === 'single-types') {
+      getSingleTypeId();
+    }
+  }, [collectionType, getSingleTypeId]);
+
   useEffect(() => {
     async function getTrails(page, pageSize) {
       const params = new URLSearchParams({
@@ -54,7 +85,7 @@ function PaperTrail() {
         pageSize,
         sort: 'version:DESC',
         'filters[$and][0][contentType][$eq]': uid,
-        'filters[$and][1][recordId][$eq]': id
+        'filters[$and][1][recordId][$eq]': recordId
       }).toString();
 
       const requestUri = `/content-manager/collection-types/plugin::paper-trail.trail?${params}`;
@@ -84,24 +115,27 @@ function PaperTrail() {
       }
     }
 
-    if (!loaded && paperTrailEnabled && id) {
+    if (!loaded && paperTrailEnabled && recordId) {
       getTrails(page, pageSize);
     } else {
       setInitialLoad(true);
     }
-  }, [loaded, uid, id, page, paperTrailEnabled, request]);
+  }, [loaded, uid, recordId, page, paperTrailEnabled, request]);
 
   /**
    * event listener for submit button
    */
 
-  const handler = useCallback(() => {
-    setTimeout(() => {
+  const handler = useCallback(async () => {
+    setTimeout(async () => {
+      if (collectionType === 'single-types') {
+        await getSingleTypeId();
+      }
       setPage(1);
       setLoaded(false);
       setInitialLoad(false);
     }, 1000);
-  }, []);
+  }, [getSingleTypeId, collectionType]);
 
   const handleSetPage = useCallback(newPage => {
     setPage(newPage);
@@ -228,6 +262,7 @@ function PaperTrail() {
         pageCount={pageCount}
         total={total}
         setPage={handleSetPage}
+        collectionType={collectionType}
       />
     </Fragment>
   );
