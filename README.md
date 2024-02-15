@@ -12,6 +12,7 @@ Accountability and content versioning for strapi v4+.
 ## Features
 
 - Automatic revision history and auditing with support for all major strapi content types including relations, media, components, and dynamic zones via the admin panel.
+- Support for collection and single content types.
 - Roll-back capabilities with the option to select specific fields to restore via the admin panel.
 - Tracks revision history by both admins and users.
 - Internationalization (i18n) plugin support.

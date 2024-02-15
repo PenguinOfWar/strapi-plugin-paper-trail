@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-paper-trail",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Accountability and content versioning for strapi v4+",
   "homepage": "https://github.com/PenguinOfWar/strapi-plugin-paper-trail#readme",
   "bugs": {

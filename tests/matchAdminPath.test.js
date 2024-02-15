@@ -23,10 +23,20 @@ describe('utils: matchAdminPath', () => {
       )
     );
 
+    const result5 = Boolean(
+      matchAdminPath('/content-manager/single-types/api::foo-type.bar-type/')
+    );
+
+    const result6 = Boolean(
+      matchAdminPath('/content-manager/single-types/api::foo-type.bar-type/4')
+    );
+
     expect(result1).toBe(true);
     expect(result2).toBe(true);
     expect(result3).toBe(true);
     expect(result4).toBe(true);
+    expect(result5).toBe(true);
+    expect(result6).toBe(true);
   });
 
   it('should reject invalid paths', async function () {
