@@ -5,7 +5,7 @@ import {
   PreviousLink
 } from '@strapi/design-system/v2';
 import PropTypes from 'prop-types';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import getPaginationList from '../../utils/getPaginationList';
 
