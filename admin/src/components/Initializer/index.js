@@ -20,7 +20,7 @@ const Initializer = ({ setPlugin }) => {
 };
 
 Initializer.propTypes = {
-  setPlugin: PropTypes.func.isRequired,
+  setPlugin: PropTypes.func.isRequired
 };
 
 export default Initializer;
